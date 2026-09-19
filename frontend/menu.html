@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subbayya Gari Hotel | Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Serif+Telugu:wght@500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--brown:#4a210d;--brown2:#6e3515;--orange:#ed671d;--orange2:#f47a22;--cream:#fff9ed;--line:#e8d9c1;--text:#24170f;--muted:#745d4b}
+*{box-sizing:border-box}body{margin:0;background:#fbf6ea;color:var(--text);font-family:"DM Sans",sans-serif}
+.topbar{height:122px;background:#fff9ed;display:flex;align-items:center;justify-content:space-between;padding:8px 4.2%;border-bottom:1px solid #ead8bc}
+.brand{display:flex;align-items:center;gap:12px;min-width:350px}.brand img{width:104px;height:104px;object-fit:contain}.brand-title{font-family:"Playfair Display",serif;font-size:28px;font-weight:800;color:#7a3410}.brand-sub{font-size:14px;font-weight:700;color:#51341f;letter-spacing:.2px}
+.features{display:flex;align-items:center;gap:44px;color:#542c18}.feature{display:flex;align-items:center;gap:9px}.feature-icon{font-size:27px}.feature b{display:block;font-size:14px}.feature small{font-size:11px;color:#7e6857}.tagline{font:italic 25px "Playfair Display",serif;text-align:right}.tagline span{font-size:16px;display:block}
+.nav{height:57px;background:linear-gradient(90deg,#3e1b0b,#6c2d0e,#4a210d);display:flex;justify-content:center;align-items:center;gap:0;box-shadow:0 3px 7px #0002}.nav a{height:57px;padding:0 28px;display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:700}.nav a:hover,.nav a.active{background:var(--orange)}
+.banner{height:104px;position:relative;overflow:hidden;background:linear-gradient(90deg,#2c1a10,#6b3a19 45%,#342015);display:flex;align-items:center;padding:0 7%;color:white}.banner:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 50%,#b96c2a55,transparent 28%),radial-gradient(circle at 85% 50%,#c57b3150,transparent 25%)}.banner>*{position:relative}.banner h1{font:800 55px/1 "Playfair Display",serif;margin:0}.banner p{margin:7px 0 0;font:italic 16px "Playfair Display",serif}.quote{margin-left:auto;font:italic 20px "Playfair Display",serif}.search{position:absolute;right:3%;top:30px;background:#fff9ed;border-radius:28px;padding:12px 18px;width:255px;border:0;outline:0;font:14px "DM Sans";z-index:2}.layout{display:grid;grid-template-columns:250px 1fr;gap:25px;padding:18px 2.2% 0}
+.side{background:#fffaf0;border:1px solid var(--line);border-radius:14px;padding:12px;height:max-content;box-shadow:0 5px 20px #5c35150c}.side button{width:100%;border:0;background:transparent;padding:14px 11px;border-bottom:1px solid #eee2d0;text-align:left;font:600 15px "Noto Serif Telugu","DM Sans";cursor:pointer;color:#352016;border-radius:8px}.side button:last-of-type{border:0}.side button.active{background:linear-gradient(135deg,#ee671d,#f47720);color:white;box-shadow:0 5px 14px #e65e1930}.side-note{margin-top:16px;padding:17px;border-radius:10px;background:#fff3da;text-align:center;font:italic 14px "Playfair Display";color:#684020}.side-note b{display:block;font:normal 13px "DM Sans";margin-top:7px}
+.content{min-width:0}.content-head{display:flex;align-items:end;justify-content:space-between;margin:2px 0 13px}.content-head h2{font:700 27px "Playfair Display";margin:0}.content-head span{font-size:14px;color:#55473c}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.card{background:#fff;border:1px solid #e7d9c4;border-radius:12px;overflow:hidden;box-shadow:0 3px 10px #5a32140d;transition:.18s}.card:hover{transform:translateY(-2px);box-shadow:0 8px 20px #5a32141a}.photo{height:145px;background:#ead7bd;position:relative;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.photo .placeholder{height:100%;display:grid;place-items:center;font-size:64px}.veg{position:absolute;right:10px;bottom:8px;width:20px;height:20px;border:2px solid #168334;background:#fff;display:grid;place-items:center}.veg:after{content:"";width:8px;height:8px;background:#16923a;border-radius:50%}.card-body{padding:9px 10px 10px}.food-name{font:700 18px "Noto Serif Telugu","Playfair Display";line-height:1.2;min-height:26px}.food-desc{font-size:10px;color:#816b58;min-height:28px;margin-top:3px}.row{display:flex;align-items:center;justify-content:space-between;margin-top:7px}.price{font-size:17px;font-weight:800}.add{border:0;background:linear-gradient(135deg,#ef661c,#f47a22);color:white;border-radius:9px;padding:9px 13px;font-weight:800;cursor:pointer}.add:disabled{background:#c9b8a5;cursor:not-allowed}.bottom{margin-top:18px;background:#4a210d;color:white;padding:17px 4%;display:flex;align-items:center;justify-content:space-between}.bottom span{font-size:12px}.bottom .contact{display:flex;gap:35px}.bottom em{font:italic 18px "Playfair Display"}
+.chat{position:fixed;right:22px;bottom:22px;background:var(--orange);color:#fff;border:0;border-radius:50%;width:58px;height:58px;font-size:25px;box-shadow:0 10px 28px #5a220044;cursor:pointer;z-index:30}.chat-label{position:fixed;right:27px;bottom:87px;background:#3d2113;color:#fff;border-radius:20px;padding:7px 12px;font-size:11px;z-index:30}
+.cart{position:fixed;right:92px;bottom:23px;background:#fff;border:1px solid #dfcdb4;border-radius:25px;padding:9px 14px;font-weight:800;color:#6e3515;z-index:30;box-shadow:0 10px 30px #0002}
+@media(max-width:1200px){.features{gap:15px}.feature:nth-child(3){display:none}.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:850px){.topbar{height:auto;min-height:90px}.features,.tagline{display:none}.brand{min-width:0}.brand img{width:72px;height:72px}.brand-title{font-size:21px}.nav a{padding:0 12px;font-size:12px}.banner{height:125px;padding:0 4%}.banner h1{font-size:42px}.quote{display:none}.search{position:static;margin-left:auto;width:210px}.layout{grid-template-columns:185px 1fr;padding:12px 2%}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.nav{overflow:auto;justify-content:flex-start}.nav a{white-space:nowrap}.banner{display:block;padding-top:18px}.search{margin-top:15px;width:100%}.layout{grid-template-columns:1fr}.side{display:flex;overflow:auto;gap:7px}.side button{min-width:125px;border:0}.side-note{display:none}.grid{grid-template-columns:1fr 1fr}.photo{height:125px}.food-name{font-size:15px}.bottom{display:block}.bottom .contact{margin:7px 0;display:block}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">
+    <img src="/static/logo.png" alt="Subbayya Gari Hotel">
+    <div><div class="brand-title">V-FOODS</div><div class="brand-sub">Traditional Taste, Timeless Happiness</div></div>
+  </a>
+  <div class="features">
+    <div class="feature"><span class="feature-icon">🌿</span><div><b>Pure Taste</b><small>Vegetarian Menu</small></div></div>
+    <div class="feature"><span class="feature-icon">♥</span><div><b>Since 1955</b><small>Traditional Taste</small></div></div>
+    <div class="feature"><span class="feature-icon">👨‍👩‍👧‍👦</span><div><b>Serving Generations</b><small>Kakinada</small></div></div>
+  </div>
+  <div class="tagline">A meal<br><span>Beyond Food</span></div>
+</header>
+<nav class="nav">
+<a href="/">⌂ Home</a><a class="active" href="/menu">🍴 Menu</a><a href="#weekly">▣ Weekly Menu</a><a href="/#tables">♜ Book a Table</a><a href="#reviews">★ Reviews</a><a href="#contact">☎ Contact</a><a href="#" onclick="openChat();return false">▣ AI Assistant</a>
+</nav>
+<section class="banner">
+  <div><h1>Our Menu</h1><p>Authentic Andhra Flavors, Served with Love</p></div>
+  <div class="quote">“Good food brings people together”</div>
+  <input id="search" class="search" placeholder="⌕  Search for dishes..." oninput="searchFood()">
+</section>
+<div class="layout">
+  <aside class="side" id="categories">
+    <button class="active" onclick="selectCat('all',this)">▦ &nbsp; All Items</button>
+    <button onclick="selectCat('meals',this)">🍽️ &nbsp; Meals & Combos</button>
+    <button onclick="selectCat('breakfast',this)">☀️ &nbsp; Breakfast</button>
+    <button onclick="selectCat('biryani',this)">🍚 &nbsp; Rice & Biryani</button>
+    <button onclick="selectCat('curries',this)">🥘 &nbsp; Curries</button>
+    <button onclick="selectCat('soups',this)">🍲 &nbsp; Soups</button>
+    <button onclick="selectCat('snacks',this)">🥜 &nbsp; Snacks</button>
+    <button onclick="selectCat('tiffins',this)">🥞 &nbsp; Tiffins</button>
+    <button onclick="selectCat('beverages',this)">☕ &nbsp; Beverages</button>
+    <button onclick="selectCat('desserts',this)">🍰 &nbsp; Desserts</button>
+    <div class="side-note">“Traditional Food<br>for a Healthier Tomorrow”<b>100% VEGETARIAN</b></div>
+  </aside>
+  <section class="content">
+    <div class="content-head"><h2 id="heading">All Items</h2><span id="count">Showing 0 items</span></div>
+    <div id="grid" class="grid"></div>
+  </section>
+</div>
+<footer class="bottom" id="contact"><span>📍 Kakinada, Andhra Pradesh</span><div class="contact"><span>☎ 09010888842, 88975 64242</span><span>◷ Open Daily: 6:00 AM – 10:00 PM</span></div><em>Good Food. Good People. Always.</em></footer>
+<div class="cart" onclick="openCart()">🛒 Cart <span id="cartCount">0</span></div><div class="chat-label">Ask Subbayya AI</div><button class="chat" onclick="openChat()">▣</button>
+<script>
+let foods=[],cat="all",cart=[];
+const teluguNames={"Andhra Veg Meals":"ఆంధ్ర వెజ్ మీల్స్","Special Veg Meals":"స్పెషల్ వెజ్ మీల్స్","Veg Biryani":"వెజ్ బిర్యానీ","Mushroom Biryani":"మష్రూమ్ బిర్యానీ","Paneer 65":"పనీర్ 65","Gobi 65":"గోబీ 65","Gulab Jamun":"గులాబ్ జామున్","Payasam":"పాయసం"};
+async function load(){const r=await fetch("/api/menu");foods=await r.json();render()}
+function selectCat(c,b){cat=c;document.querySelectorAll(".side button").forEach(x=>x.classList.remove("active"));b.classList.add("active");render()}
+function searchFood(){render()}
+function render(){const q=(document.getElementById("search").value||"").toLowerCase();let list=foods.filter(f=>(cat==="all"||f.category===cat)&&(!q||f.name.toLowerCase().includes(q)));document.getElementById("heading").textContent=cat==="all"?"All Items":cat[0].toUpperCase()+cat.slice(1);document.getElementById("count").textContent=`Showing ${list.length} item${list.length!==1?"s":""}`;document.getElementById("grid").innerHTML=list.map(f=>`<article class="card"><div class="photo">${f.image?`<img src="${f.image}" alt="${f.name}">`:`<div class="placeholder">${emoji(f.category)}</div>`}<span class="veg"></span></div><div class="card-body"><div class="food-name">${teluguNames[f.name]||f.name}</div><div class="food-desc">${f.description||"Fresh vegetarian preparation"}</div><div class="row"><span class="price">₹ ${f.price}</span><button class="add" ${!f.available||f.stock<1?"disabled":""} onclick="add(${f.id})">${f.available&&f.stock>0?"+ Add":"Unavailable"}</button></div></div></article>`).join("")}
+function emoji(c){return c==="biryani"?"🍚":c==="desserts"?"🍮":c==="starters"?"🥗":"🍛"}
+function add(id){let f=foods.find(x=>x.id===id),x=cart.find(x=>x.id===id);if(x)x.quantity++;else cart.push({id:f.id,name:f.name,price:f.price,quantity:1});document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.quantity,0)}
+function openCart(){alert(cart.length?cart.map(x=>`${x.name} × ${x.quantity} = ₹${x.price*x.quantity}`).join("\\n")+"\\n\\nCart checkout can be connected to your payment flow.":"Cart is empty.")}
+function openChat(){alert("Subbayya AI: Ask about vegetarian food availability, tables, reservations, timings or orders.")}
+load();
+</script>
+</body></html>

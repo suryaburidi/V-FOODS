@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subbayya Gari Hotel | Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fbf6eb;color:#2b1c13;font-family:"DM Sans",sans-serif}.top{padding:18px 6%;background:#33231a;color:#fff;display:flex;justify-content:space-between;align-items:center}.top h1{font:700 25px "Playfair Display";margin:0}.top small{color:#ddc9b6}.top button,.primary{border:0;background:#a65320;color:#fff;padding:11px 16px;border-radius:10px;font-weight:700;cursor:pointer}.wrap{max-width:1180px;margin:35px auto;padding:0 20px}.login{max-width:420px;margin:100px auto;background:#fff;border:1px solid #eadbc7;border-radius:18px;padding:28px;box-shadow:0 20px 50px #0001}.login h2{font:700 30px "Playfair Display"}.input{width:100%;padding:13px;border:1px solid #ddcbb6;border-radius:9px;margin:7px 0 14px}.hidden{display:none}.grid{display:grid;grid-template-columns:360px 1fr;gap:22px}.card{background:#fff;border:1px solid #eadbc7;border-radius:16px;padding:20px}.card h2{margin-top:0;font:700 25px "Playfair Display"}.food-list{display:grid;gap:10px}.food{border:1px solid #eadbc7;border-radius:12px;padding:13px;display:flex;justify-content:space-between;gap:10px}.food b{display:block}.food small{color:#806b5a}.actions button{border:0;border-radius:8px;padding:7px 9px;margin:2px;cursor:pointer}.edit{background:#f0e1cf;color:#7c3d18}.delete{background:#f3d7d1;color:#8b3025}.toggle{background:#dcebd9;color:#3f713c}.tabs{display:flex;gap:8px;margin:0 0 18px}.tabs button{border:1px solid #d9c5ad;background:#fff8ef;border-radius:999px;padding:9px 13px;cursor:pointer}.tabs button.active{background:#a65320;color:#fff}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:11px;border-bottom:1px solid #eadbc7;font-size:13px}.veg{display:inline-block;background:#e4f0dd;color:#3d7337;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700}.availability{font-size:11px;font-weight:700}.on{color:#3d7337}.off{color:#a23e2e}@media(max-width:850px){.grid{grid-template-columns:1fr}}
+</style></head><body>
+<div id="loginView" class="login"><h2>Subbayya Gari Admin</h2><p>Manage vegetarian food, stock and availability.</p>
+<input id="password" class="input" type="password" placeholder="Admin password"><button class="primary" onclick="login()">Login</button><p id="loginMsg"></p></div>
+<div id="appView" class="hidden"><header class="top"><div><h1>Subbayya Gari Hotel</h1><small>Kakinada • Vegetarian Admin Panel</small></div><div><a href="/" style="color:#fff;margin-right:15px">View Website</a><button onclick="logout()">Logout</button></div></header>
+<main class="wrap"><div class="tabs"><button class="active" onclick="showTab('menu',this)">Food & Availability</button><button onclick="showTab('orders',this)">Orders</button><button onclick="showTab('reservations',this)">Reservations</button></div>
+<section id="menuTab"><div class="grid"><div class="card"><h2 id="formTitle">Add Vegetarian Food</h2><input id="fid" type="hidden"><label>Food name</label><input id="name" class="input" placeholder="e.g. Veg Pulao"><label>Price (₹)</label><input id="price" class="input" type="number" min="0"><label>Category</label><select id="category" class="input"><option value="meals">Meals</option><option value="biryani">Biryani</option><option value="starters">Starters</option><option value="desserts">Desserts</option></select><label>Stock / quantity available</label><input id="stock" class="input" type="number" min="0" value="20"><label>Description</label><input id="description" class="input" placeholder="Short description"><label>Food photo</label><input id="foodImage" class="input" type="file" accept=".jpg,.jpeg,.png,.webp"><label><input id="available" type="checkbox" checked> Available for ordering</label><br><br><button class="primary" onclick="saveFood()">Save Food</button> <button onclick="resetForm()">Clear</button><p id="formMsg" style="font-weight:700;margin-top:12px"></p></div>
+<div class="card"><h2>Vegetarian Menu</h2><p>Use <b>Availability</b> to turn an item ON/OFF. Stock is automatically reduced when an order is placed.</p><div id="foodList" class="food-list"></div></div></div></section>
+<section id="ordersTab" class="card hidden"><h2>Recent Orders</h2><div id="orders" class="table-wrap"></div></section>
+<section id="reservationsTab" class="card hidden"><h2>Recent Table Reservations</h2><div id="reservations" class="table-wrap"></div></section>
+</main></div>
+<script>
+async function login(){const r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:document.getElementById("password").value})});const d=await r.json();if(d.success){document.getElementById("loginView").classList.add("hidden");document.getElementById("appView").classList.remove("hidden");loadFoods()}else document.getElementById("loginMsg").textContent=d.error||"Login failed"}
+async function logout(){await fetch("/api/admin/logout",{method:"POST"});location.reload()}
+async function loadFoods(){const r=await fetch("/api/admin/menu");if(r.status===401)return location.reload();const foods=await r.json();document.getElementById("foodList").innerHTML=foods.map(f=>`<div class="food"><div style="display:flex;gap:10px;align-items:center">${f.image?`<img src="${f.image}" style="width:58px;height:58px;object-fit:cover;border-radius:10px">`:"<div style=\"width:58px;height:58px;border-radius:10px;background:#f0e1cf;display:grid;place-items:center\">🍛</div>"}<div><b>${f.name} <span class="veg">VEG</span></b><small>₹${f.price} • ${f.category} • Stock: ${f.stock}</small><br><span class="availability ${f.available?'on':'off'}">${f.available?'AVAILABLE':'UNAVAILABLE'}</span></div><div class="actions"><button class="toggle" onclick="toggleFood(${f.id},${!f.available})">${f.available?'Turn OFF':'Turn ON'}</button><button class="edit" onclick='editFood(${JSON.stringify(f)})'>Edit</button><button class="delete" onclick="deleteFood(${f.id})">Delete</button></div></div>`).join("")}
+function editFood(f){fid.value=f.id;name.value=f.name;price.value=f.price;category.value=f.category;stock.value=f.stock;description.value=f.description||"";available.checked=!!f.available;formTitle.textContent="Edit Vegetarian Food";window.scrollTo({top:0,behavior:"smooth"})}
+function resetForm(){fid.value="";name.value="";price.value="";category.value="meals";stock.value=20;description.value="";available.checked=true;document.getElementById("foodImage").value="";formTitle.textContent="Add Vegetarian Food";formMsg.textContent=""}
+async function saveFood(){
+  const nameValue=document.getElementById("name").value.trim();
+  const priceValue=document.getElementById("price").value;
+  const stockValue=document.getElementById("stock").value;
+  const categoryValue=document.getElementById("category").value;
+  const descriptionValue=document.getElementById("description").value.trim();
+  const availableValue=document.getElementById("available").checked;
+  const file=document.getElementById("foodImage").files[0];
+  const msg=document.getElementById("formMsg");
+
+  if(!nameValue || priceValue==="" || stockValue===""){
+    msg.textContent="Please enter Food Name, Price and Stock. [NEW ADMIN]";
+    msg.style.color="#a23e2e";
+    return;
+  }
+
+  const body={
+    name:nameValue,
+    price:Number(priceValue),
+    category:categoryValue,
+    stock:Number(stockValue),
+    description:descriptionValue,
+    available:availableValue
+  };
+
+  try{
+    const editing=!!document.getElementById("fid").value;
+    const id=document.getElementById("fid").value;
+    const url=editing?"/api/admin/menu/"+id:"/api/admin/menu";
+    const method=editing?"PUT":"POST";
+
+    msg.textContent="Saving...";
+    msg.style.color="#7c3d18";
+
+    const r=await fetch(url,{
+      method,
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(body)
+    });
+
+    const d=await r.json().catch(()=>({}));
+
+    if(!r.ok){
+      msg.textContent=d.error||("Save failed (HTTP "+r.status+")");
+      msg.style.color="#a23e2e";
+      return;
+    }
+
+    const itemId=editing?id:d.id;
+
+    if(file && itemId){
+      const fd=new FormData();
+      fd.append("image",file);
+      const ir=await fetch("/api/admin/menu/"+itemId+"/image",{method:"POST",body:fd});
+      const idata=await ir.json().catch(()=>({}));
+      if(!ir.ok){
+        msg.textContent="Food saved, but photo upload failed: "+(idata.error||"unknown error");
+        msg.style.color="#a23e2e";
+        await loadFoods();
+        return;
+      }
+    }
+
+    msg.textContent="✓ Food saved successfully!";
+    msg.style.color="#3d7337";
+    resetForm();
+    await loadFoods();
+  }catch(err){
+    msg.textContent="Could not connect to server. Make sure python app.py is running.";
+    msg.style.color="#a23e2e";
+    console.error(err);
+  }
+}
+async function toggleFood(id,on){await fetch("/api/admin/menu/"+id+"/availability",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({available:on})});loadFoods()}
+async function deleteFood(id){if(!confirm("Delete this food item?"))return;await fetch("/api/admin/menu/"+id,{method:"DELETE"});loadFoods()}
+function showTab(tab,btn){document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));btn.classList.add("active");["menu","orders","reservations"].forEach(x=>document.getElementById(x+"Tab").classList.toggle("hidden",x!==tab));if(tab==="orders")loadOrders();if(tab==="reservations")loadReservations()}
+async function loadOrders(){const r=await fetch("/api/admin/orders"),d=await r.json();document.getElementById("orders").innerHTML="<table><tr><th>ID</th><th>Customer</th><th>Phone</th><th>Total</th><th>Payment</th><th>Address</th><th>Status</th><th>Created</th></tr>"+d.map(x=>`<tr><td>#${x.id}</td><td>${x.customer_name}</td><td>${x.phone}</td><td>₹${x.total}</td><td>${x.payment_method} (${x.payment_status})</td><td>${x.address}</td><td><select onchange="changeOrderStatus(${x.id},this.value)"><option ${x.status==="received"?"selected":""}>received</option><option ${x.status==="preparing"?"selected":""}>preparing</option><option ${x.status==="out_for_delivery"?"selected":""}>out_for_delivery</option><option ${x.status==="delivered"?"selected":""}>delivered</option><option ${x.status==="cancelled"?"selected":""}>cancelled</option></select></td><td>${x.created_at}</td></tr>`).join("")+"</table>"}
+async function loadReservations(){const r=await fetch("/api/admin/reservations"),d=await r.json();document.getElementById("reservations").innerHTML="<table><tr><th>ID</th><th>Customer</th><th>Phone</th><th>Date</th><th>Time</th><th>Guests</th><th>Table</th><th>Status</th></tr>"+d.map(x=>`<tr><td>#${x.id}</td><td>${x.customer_name}</td><td>${x.phone}</td><td>${x.booking_date}</td><td>${x.booking_time}</td><td>${x.guests}</td><td>${x.table_no}</td><td>${x.status}</td></tr>`).join("")+"</table>"}
+async function changeOrderStatus(id,status){await fetch("/api/admin/orders/"+id+"/status",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({status})})}
+</script></body></html>

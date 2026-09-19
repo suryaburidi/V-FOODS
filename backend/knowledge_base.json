@@ -1,0 +1,52 @@
+[
+  {
+    "id": "hotel_identity",
+    "title": "Hotel identity",
+    "text": "Subbayya Gari Hotel is a vegetarian food ordering and table reservation service in Kakinada. The online menu is vegetarian-only."
+  },
+  {
+    "id": "timings",
+    "title": "Opening hours",
+    "text": "The hotel is open daily from 6:00 AM to 10:00 PM."
+  },
+  {
+    "id": "food_ordering",
+    "title": "Food ordering",
+    "text": "Customers can browse vegetarian food, add items to the cart, change quantities, provide their name, phone number and complete delivery address, then choose UPI/online demo payment, card demo payment, or Cash on Delivery."
+  },
+  {
+    "id": "delivery",
+    "title": "Delivery details",
+    "text": "A food order requires customer name, phone number and complete delivery address. The order confirmation shows the order number, total, payment method and delivery address. Customers can track recent orders using the same phone number."
+  },
+  {
+    "id": "table_booking",
+    "title": "Table booking",
+    "text": "Customers can reserve a table by choosing a date, time and number of guests and providing their name and phone number. The system checks live reservations and confirms an available suitable table."
+  },
+  {
+    "id": "table_rules",
+    "title": "Table availability",
+    "text": "The restaurant has tables for 2, 4, 6 and 8 guests. Availability depends on the selected date, time and guest count. A table already reserved for the same date and time is not shown as available."
+  },
+  {
+    "id": "ai_ordering",
+    "title": "AI ordering",
+    "text": "The assistant can understand food requirements such as '2 Veg Biryani and 1 Paneer 65', check current stock, and add available requested vegetarian items to the cart. It should never claim an item is available without checking current menu stock."
+  },
+  {
+    "id": "ai_scope",
+    "title": "Assistant scope",
+    "text": "The assistant answers questions about the hotel's vegetarian menu, food availability, food ordering, delivery details, table availability and table reservations, opening hours, and customer order tracking. For unrelated questions it should politely say it is focused on Subbayya Gari Hotel food, tables and orders."
+  },
+  {
+    "id": "payment",
+    "title": "Payments",
+    "text": "The prototype supports UPI/online and card payment choices as demo payment methods, plus Cash on Delivery. Online/card transactions are not connected to a live payment gateway in this prototype."
+  },
+  {
+    "id": "contact",
+    "title": "Contact",
+    "text": "Subbayya Gari Hotel is in Kakinada, Andhra Pradesh. The website displays contact numbers 09010888842 and 88975 64242."
+  }
+]
